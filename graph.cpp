@@ -4,5 +4,5 @@
 using namespace std;
 
 Graph::Graph(int num_vertices) {
-    // Your code here
+   this->graph = new list<list<City>>;
 }

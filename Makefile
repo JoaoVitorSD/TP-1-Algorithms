@@ -10,15 +10,21 @@ SRCS := $(wildcard *.cpp)
 # Object files
 OBJS := $(SRCS:.cpp=.o)
 
+# Header files
+
 # Target executable
 TARGET := tp01
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
+print:	
+	@echo $(HEADERS) \
+
+
+$(TARGET): $(OBJS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
