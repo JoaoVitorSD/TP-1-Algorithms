@@ -1,5 +1,6 @@
 #ifndef GRAPH_HPP
 #define GRAPH_HPP
+#define INF 0x3f3f3f3f
 
 #include <vector>
 #include <list>
@@ -12,8 +13,8 @@ class Graph {
 public:
     Graph(int num_vertices);
     void addVertex(const int originId,const City city);
-    int shorterDistance(const int originCityId, const int destinyCityid);
     void print();
+    int dijkstra(int originCityId, int destinyCityId);
 
 private:
 };

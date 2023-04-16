@@ -23,3 +23,35 @@ void Graph::print(){
       }
    }
 }
+
+int Graph::dijkstra(int originCityId, int destinyCityId){
+   int * distance = new int[length];
+   bool finded  =false;
+   list<int> * priorityQueue = new list<int>;
+   priorityQueue->push_back(originCityId);
+
+   for( int i = 0; i < length ; i++){
+      distance[i]= INF;
+   }
+   distance[originCityId] = 0;
+
+   while(!priorityQueue->empty()){
+      int first = priorityQueue->front();
+      priorityQueue->pop_front();
+
+      for(City c: *graph[first]){
+         cout<< c.getCityId()<< " "<< c.getDistance()<<" ";
+         if (distance[c.getCityId()] > distance[first] + c.getDistance() || distance[c.getCityId()] == INF)
+         {
+            cout << "City - " << c.getCityId() << " Distance - " << c.getDistance() << "\n";
+            distance[first] = distance[c.getCityId()] + c.getDistance();
+            priorityQueue->push_back(c.getCityId());
+            if(c.getCityId()==originCityId) finded=true;
+         }
+      }
+      if(finded){
+         return distance[destinyCityId];
+      }
+   }
+   return -1;
+}

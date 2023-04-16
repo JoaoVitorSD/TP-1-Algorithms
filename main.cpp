@@ -1,7 +1,6 @@
 #include <iostream>
 #include "graph.hpp"
 #include <list>
-#define INF -1
 
 using namespace std;
 
@@ -24,6 +23,6 @@ int main(int argc, char const *argv[])
         graph->addVertex(origin, City(destiny, weight));
      
     }
-    graph->print();
+    std::cout<<graph->dijkstra(1,4);
     return 0;
 }
