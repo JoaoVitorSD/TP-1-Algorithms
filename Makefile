@@ -28,7 +28,7 @@ $(TARGET): $(OBJS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) 
 
 test_cases_dir := test_cases
 

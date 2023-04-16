@@ -7,13 +7,13 @@
 
 using namespace std;
 class Graph {
-    list<list<City>> *graph;
+    list<City> **graph;
+    int length;
 public:
     Graph(int num_vertices);
-    void addEdge(const int cityId);
-    void addVertex(const City city);
+    void addVertex(const int originId,const City city);
     int shorterDistance(const int originCityId, const int destinyCityid);
-
+    void print();
 
 private:
 };

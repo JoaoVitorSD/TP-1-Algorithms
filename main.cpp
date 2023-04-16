@@ -11,12 +11,9 @@ int main(int argc, char const *argv[])
 
     cin >> n >> a;
 
-    int **graph = new int *[n];
+    Graph * graph = new Graph(n);
 
-    for (int i = 0; i < n; i++)
-    {
-        graph[i] = new int[a];
-    }
+
     for (int j = 0; j < a; j++){
         int origin, destiny, weight;
         cin >> origin >> destiny >> weight;
@@ -24,7 +21,9 @@ int main(int argc, char const *argv[])
         {
             continue;
         }
-        graph[origin - 1][destiny - 1] = weight;
+        graph->addVertex(origin, City(destiny, weight));
+     
     }
+    graph->print();
     return 0;
 }
