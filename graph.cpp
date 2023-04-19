@@ -3,53 +3,61 @@
 
 using namespace std;
 
-Graph::Graph(int num_vertices) {
-   graph = new list<City>*[num_vertices+1];
+Graph::Graph(int num_vertices){
+   graph = new list<City> *[num_vertices];
    length = num_vertices;
-   for(int i = 0; i < num_vertices+1;i++){
+   for (int i = 0; i < num_vertices; i++){
       graph[i] = new list<City>();
    }
 }
 
-void Graph::addVertex(const int originId,const City city){
+void Graph::addVertex(const int originId,  City city)
+{
    graph[originId]->push_back(city);
 }
 
-void Graph::print(){
+void Graph::print()
+{
 
-   for(int i = 0; i < length ; i++){
-      for( City c : *graph[i]){
-         cout<<i<<" "<<c.getCityId()<<" "<<c.getDistance()<<"\n";
+   for (int i = 0; i < length; i++){
+      for (City c : *graph[i]){
+         cout << i << " " << c.getCityId() << " " << c.getDistance() << "\n";
       }
    }
 }
 
-int Graph::dijkstra(int originCityId, int destinyCityId){
-   int * distance = new int[length];
-   bool finded  =false;
-   list<int> * priorityQueue = new list<int>;
-   priorityQueue->push_back(originCityId);
+int Graph::dijkstra(int destinyCityId){
+   int *distance = new int[length];
+   bool finded = false;
+   list<int> *priorityQueue = new list<int>;
 
-   for( int i = 0; i < length ; i++){
-      distance[i]= INF;
+   priorityQueue->push_back(0);
+
+   distance[0] = 0;
+   for (int i = 1; i < length; i++){
+      distance[i] = INF;
    }
-   distance[originCityId] = 0;
 
-   while(!priorityQueue->empty()){
+   for (int i = 1;!priorityQueue->empty();i++){
+
       int first = priorityQueue->front();
       priorityQueue->pop_front();
 
-      for(City c: *graph[first]){
-         cout<< c.getCityId()<< " "<< c.getDistance()<<" ";
-         if (distance[c.getCityId()] > distance[first] + c.getDistance() || distance[c.getCityId()] == INF)
-         {
-            cout << "City - " << c.getCityId() << " Distance - " << c.getDistance() << "\n";
-            distance[first] = distance[c.getCityId()] + c.getDistance();
-            priorityQueue->push_back(c.getCityId());
-            if(c.getCityId()==originCityId) finded=true;
+      for (City c : *graph[first]){
+         if (distance[c.getCityId()] > distance[first] + c.getDistance() || distance[c.getCityId()] == INF){
+            distance[c.getCityId()] = distance[first] + c.getDistance();
+            //Se não tiver sido explorado, adiciona a lista de prioridade
+            if (distance[c.getCityId()] != INF){
+               priorityQueue->push_front(c.getCityId());
+            }
+            if (c.getCityId() == length - 1&& i%2!=1)
+            {
+               finded = true;
+            }
          }
       }
-      if(finded){
+      if (finded)
+      {
          return distance[destinyCityId];
       }
    }

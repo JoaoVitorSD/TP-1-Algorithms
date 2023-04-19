@@ -20,9 +20,10 @@ int main(int argc, char const *argv[])
         {
             continue;
         }
-        graph->addVertex(origin, City(destiny, weight));
+        graph->addVertex(origin-1,  City(destiny-1, weight));
+        graph->addVertex(destiny-1, City(origin-1, weight));
      
     }
-    std::cout<<graph->dijkstra(1,4);
+    std::cout<<graph->dijkstra(n-1);
     return 0;
 }

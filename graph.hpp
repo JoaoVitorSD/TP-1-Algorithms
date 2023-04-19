@@ -14,7 +14,7 @@ public:
     Graph(int num_vertices);
     void addVertex(const int originId,const City city);
     void print();
-    int dijkstra(int originCityId, int destinyCityId);
+    int dijkstra(int destinyCityId);
 
 private:
 };
