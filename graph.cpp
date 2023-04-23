@@ -7,6 +7,8 @@ Graph::Graph(int num_vertices)
 {
    graph = new list<City> *[num_vertices];
    length = num_vertices;
+
+   destinyCity = length-1;
    for (int i = 0; i < num_vertices; i++)
    {
       graph[i] = new list<City>();
@@ -30,66 +32,60 @@ void Graph::print()
    }
 }
 
-int Graph::dijkstra(int destinyCityId)
+int Graph::dijkstra()
 {
    int *distance = new int[length];
+   int *pathDistance = new int[length];
    bool finded = false;
 
-   list<int> *priorityQueue = new list<int>;
-   list<int> *path = new list<int>();
-   priorityQueue->push_back(0);
+   PriorityQueue *priorityQueue = new PriorityQueue();
 
-   int pathed = false;
+   priorityQueue->addCity(new City(0,0));
+
 
    distance[0] = 0;
+   pathDistance[0] = 0;
    for (int i = 1; i < length; i++)
    {
       distance[i] = INF;
    }
 
-   while (!priorityQueue->empty())
+   while (priorityQueue->notEmpty())
    {
 
       //TODO implementar lista de prioridade
 
-      int first = priorityQueue->front();
-      priorityQueue->pop_front();
+      int first = priorityQueue->popFirst();
 
-      path->push_back(first);
+      cout <<"City: "<<first+1<< " PATH : " << pathDistance[first] << "\n";
 
-      pathed = false;
       for (City c : *graph[first]) 
       {
-         if (distance[c.getCityId()] > distance[first] + c.getDistance() || distance[c.getCityId()] == INF)
-         {
-            // Se não tiver sido explorado, adiciona a lista de prioridade
+         cout << "   Destiny: "<< c.getCityId()+1<<" DISTANCE: "<< c.getDistance()<< " "<< distance[c.getCityId()]<<"\n";
+         if (distance[c.getCityId()] == INF && c.getCityId()!= destinyCity){
+            cout << "   PUSHED: "<< c.getCityId()+1<<"\n";
+            priorityQueue->addCity(new City(c.getCityId(), c.getDistance()));
+            pathDistance[c.getCityId()] = pathDistance[first] + 1;
+            distance[c.getCityId()] = distance[first] + c.getDistance();
 
-            if (distance[c.getCityId()] == INF && c.getCityId() != length-1)
+         }else if (distance[c.getCityId()] > distance[first] + c.getDistance() || c.getCityId() == destinyCity)
             {
-               // cout << "path: "<< first+1<< " "<< c.getCityId()+1<< endl;
-               priorityQueue->push_front(c.getCityId());
-               pathed = true;
+               // Se não tiver sido explorado, adiciona a lista de prioridade
+
+               if (c.getCityId() != destinyCity)
+               {
+                  distance[c.getCityId()] = distance[first] + c.getDistance();
+               }
+               else if (c.getCityId() == destinyCity && (pathDistance[first] + 1) % 2 == 0)
+               {
+                  finded = true;
+                  distance[c.getCityId()] = distance[first] + c.getDistance();
+               }
             }
-            // cout << first<<" " <<distance[first] << endl;
-            if (c.getCityId() != length - 1)
-            {
-               distance[c.getCityId()] = distance[first] + c.getDistance();
-            }
-            else if (c.getCityId() == length - 1 && path->size() % 2 == 0)
-            {
-               // cout<< "FINDED "<< path->size()<<endl;
-               finded = true;
-               distance[c.getCityId()] = distance[first] + c.getDistance();
-            }
-         }
-      }
-      if (!pathed)
-      {
-         path->pop_back();
       }
       if (finded)
       {
-         return distance[destinyCityId];
+         return distance[destinyCity];
       }
    }
    return -1;
