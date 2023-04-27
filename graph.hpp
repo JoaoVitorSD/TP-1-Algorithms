@@ -15,14 +15,12 @@ class Graph {
     int destinyCity;
 
 public:
-    const Graph(int num_vertices);
+    Graph(int num_vertices);
     void addVertex(const int originId,const City city);
     void print();
     int dijkstra();
-    bool notVisited(const int vertex, const int parent);
-    void remove(const int vertex, const int parent);
-
-
+    bool notVisited(list<int> ** visited,const int vertex, const int parent);
+    void remove(list<int> ** visited, const int vertex, const int parent);
 
 private:
 };

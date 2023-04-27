@@ -29,26 +29,20 @@ void PriorityQueue::addCity(City *city)
             prevNode->next = newNode;
             newNode->next = auxNode;
 
-            cout << "        Fila: ";
             auxNode = head->next;
             while (auxNode != nullptr)
             {
-                cout << auxNode->city->getCityId()+1 << " ";
                 auxNode = auxNode->next;
             }
-            cout << endl;
             return;
         }
     }
     prevNode->next = new NodeCity(city);
-    cout << "        Fila: ";
     auxNode = head->next;
     while (auxNode != nullptr)
     {
-        cout << auxNode->city->getCityId()+1 << " ";
         auxNode = auxNode->next;
     }
-    cout << endl;
 }
 
 int PriorityQueue::popFirst()
@@ -58,18 +52,14 @@ int PriorityQueue::popFirst()
     NodeCity *auxNode = head->next;
     NodeCity *auxHead = head;
     head = head->next;
-    std::cout << "\nLendo: " << cityId+1 << "\n";
-    cout <<"    Fila: ";
 
     delete auxHead;
 
 
     while (auxNode != nullptr)
     {
-        cout << auxNode->city->getCityId()+1<<" ";
         auxNode = auxNode->next;
     }
-    cout<<endl;
     return cityId;
 }
 bool PriorityQueue::notEmpty()
