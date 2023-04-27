@@ -7,7 +7,11 @@ class City{
         City(const int cityId, const int distance);
         int getCityId(){return cityId;}
         int getDistance(){return distance;}
-
+        bool operator==(const City &s)
+        {
+            return s.cityId == cityId;
+        }
+        bool operator!=(const City &s) { return !operator==(s); }
 
     private:
      int cityId;

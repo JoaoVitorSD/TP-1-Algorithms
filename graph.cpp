@@ -38,6 +38,7 @@ int Graph::dijkstra()
    int *pathDistance = new int[length];
    bool finded = false;
 
+
    PriorityQueue *priorityQueue = new PriorityQueue();
 
    priorityQueue->addCity(new City(0,0));
@@ -57,17 +58,15 @@ int Graph::dijkstra()
 
       int first = priorityQueue->popFirst();
 
-      cout <<"City: "<<first+1<< " PATH : " << pathDistance[first] << "\n";
 
       for (City c : *graph[first]) 
       {
-         cout << "   Destiny: "<< c.getCityId()+1<<" DISTANCE: "<< c.getDistance()<< " "<< distance[c.getCityId()]<<"\n";
-         if (distance[c.getCityId()] == INF && c.getCityId()!= destinyCity){
-            cout << "   PUSHED: "<< c.getCityId()+1<<"\n";
+         if (c.getCityId()!= destinyCity&& notVisited(first,c.getCityId())){
+
+            remove(first,c.getCityId());
             priorityQueue->addCity(new City(c.getCityId(), c.getDistance()));
             pathDistance[c.getCityId()] = pathDistance[first] + 1;
             distance[c.getCityId()] = distance[first] + c.getDistance();
-
          }else if (distance[c.getCityId()] > distance[first] + c.getDistance() || c.getCityId() == destinyCity)
             {
                // Se não tiver sido explorado, adiciona a lista de prioridade
@@ -83,10 +82,20 @@ int Graph::dijkstra()
                }
             }
       }
-      if (finded)
-      {
-         return distance[destinyCity];
+   }
+   return finded? distance[destinyCity]:-1;
+}
+void Graph::remove(const int vertex, const int parent){
+   print();
+   cout<< vertex<< " "<<parent<<"\n";
+   graph[vertex]->remove(City(parent,0));
+}
+
+bool Graph::notVisited(const int vertex, const int parent){
+   for( City i : *graph[vertex]){
+      if(i.getCityId()== parent){
+         return true;
       }
    }
-   return -1;
+   return false;
 }
