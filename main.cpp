@@ -24,10 +24,6 @@ int main(int argc, char const *argv[])
         graph->addVertex(destiny-1, City(origin-1, weight));
      
     }
-    cout<< "Graph created: \n";
-    graph->print();
-
-    cout << "Running dijkstra......"<<endl;
     std::cout<<graph->dijkstra()<<"\n";
     return 0;
 }
