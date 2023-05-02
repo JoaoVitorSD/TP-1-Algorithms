@@ -15,6 +15,7 @@ class PriorityQueue
 public:
     PriorityQueue();
     void addCity( City * city);
+    void print();
     // void print();
     bool notEmpty();
     int popFirst();

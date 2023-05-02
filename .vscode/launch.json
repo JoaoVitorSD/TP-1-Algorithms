@@ -1,16 +1,16 @@
 {
   "version": "0.2.0",
   "configurations": [
+
     {
       "name": "C/C++: cpp build active file",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/tp01",
+      "program": "${workspaceFolder}/${fileBasenameNoExtension}}",
       "args": [],
-      "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
+      "externalConsole": false,
       "environment": [],
-      "externalConsole": true,
       "MIMode": "gdb",
       "miDebuggerPath": "/usr/bin/gdb",
       "preLaunchTask": "build",

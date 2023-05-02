@@ -8,58 +8,50 @@ PriorityQueue::PriorityQueue()
 
 void PriorityQueue::addCity(City *city)
 {
+    NodeCity *auxNode = head;
+
+    NodeCity * newNode = new NodeCity(city);
     if (head == nullptr)
     {
-        head = new NodeCity(city);
+        head = newNode;
         return;
     }
-    if(head->next == nullptr){
-        head->next = new NodeCity(city);
-        return;
-    }
-    NodeCity *auxNode = head->next;
-    NodeCity *prevNode = auxNode;
-    while (auxNode->next != nullptr)
-    {
-        prevNode = auxNode;
-        auxNode = auxNode->next;
-        if (prevNode->city->getDistance() > city->getDistance())
-        {
-            NodeCity *newNode = new NodeCity(city);
-            prevNode->next = newNode;
-            newNode->next = auxNode;
 
-            auxNode = head->next;
-            while (auxNode != nullptr)
-            {
-                auxNode = auxNode->next;
-            }
-            return;
-        }
+    if(head->city->getDistance()> city->getDistance()){
+        newNode->next = head;
+        head = newNode;
+        return;
     }
-    prevNode->next = new NodeCity(city);
-    auxNode = head->next;
-    while (auxNode != nullptr)
+
+    while (auxNode->next != nullptr && auxNode->next->city->getDistance()<city->getDistance())
     {
         auxNode = auxNode->next;
     }
+
+    newNode->next = auxNode->next;
+    auxNode->next = newNode;
 }
-
+void PriorityQueue::print(){
+    NodeCity *auxNode = head;
+    while (auxNode!= nullptr)
+    {
+        std::cout << auxNode->city->getCityId()+1 << " " << auxNode->city->getDistance() <<" ";
+        auxNode = auxNode->next;
+    }
+    cout<<endl;
+}
 int PriorityQueue::popFirst()
 {
 
+
     int cityId = head->city->getCityId();
-    NodeCity *auxNode = head->next;
-    NodeCity *auxHead = head;
+
+
+    NodeCity * aux = head;
     head = head->next;
 
-    delete auxHead;
+    delete aux;
 
-
-    while (auxNode != nullptr)
-    {
-        auxNode = auxNode->next;
-    }
     return cityId;
 }
 bool PriorityQueue::notEmpty()
