@@ -88,7 +88,19 @@ int Graph::dijkstra()
    }
    return finded ? distance[destinyCity] : -1;
 }
+int Graph::dfs(list<int> **visited, const int vertex, const int distance, const int edgeCount){
 
+   for(City c: *graph[vertex]){
+      if(c.getCityId() == destinyCity && edgeCount%2==0){
+         return distance+c.getDistance();
+      }
+      else if(notVisited(visited, vertex, c.getCityId())){
+         remove(visited, vertex, c.getCityId());
+         dfs(visited, c.getCityId(), distane+c.getDistance(), edgeCount+1)
+      }
+   }
+   return -1;
+}
 bool Graph::notVisited(list<int> **notVisitedsVertex, const int vertex, const int parent)
 {
    for (int i : *notVisitedsVertex[vertex])

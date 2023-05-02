@@ -20,6 +20,7 @@ public:
     void print();
     int dijkstra();
     bool notVisited(list<int> ** visited,const int vertex, const int parent);
+    int dfs(visited, n, distance, edjeCount);
     void remove(list<int> ** visited, const int vertex, const int parent);
 
 private:
