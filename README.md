@@ -28,3 +28,10 @@ satisfazendo as especificações do problema. Quando não existir tal caminho, o
 −1.
 
 
+
+
+# Idéia
+
+- Rodar dfs
+- verificar se o vértice é adjascente a cidade de destino e se a aresta não foi visitada, se sim:
+    - verifico se a camada é par, se sim marca como uma distância
