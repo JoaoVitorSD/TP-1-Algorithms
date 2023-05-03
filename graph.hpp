@@ -11,7 +11,7 @@ using namespace std;
 class Graph {
     list<City> **graph;
     int length;
-
+    int distanceCity;
     int destinyCity;
 
 public:
@@ -20,7 +20,8 @@ public:
     void print();
     int dijkstra();
     bool notVisited(list<int> ** visited,const int vertex, const int parent);
-    int dfs(visited, n, distance, edjeCount);
+    void dfs(list<pair<int,int>> visited, const int vertex, const int distance, const int edgeCount);
+    int dfsUtil();
     void remove(list<int> ** visited, const int vertex, const int parent);
 
 private:

@@ -24,6 +24,6 @@ int main(int argc, char const *argv[])
         graph->addVertex(destiny-1, City(origin-1, weight));
      
     }
-    std::cout<<graph->dijkstra()<<"\n";
+    std::cout<<graph->dfsUtil()<<"\n";
     return 0;
 }
