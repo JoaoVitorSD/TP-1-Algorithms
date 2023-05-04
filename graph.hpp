@@ -19,8 +19,7 @@ public:
     void addVertex(const int originId,const City city);
     void print();
     int dijkstra();
-    bool notVisited(list<int> ** visited,const int vertex, const int parent);
-    void remove(list<int> ** visited, const int vertex, const int parent);
+    int auxDijkstra(int destinyCity);
 
 private:
 };
