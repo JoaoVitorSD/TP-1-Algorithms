@@ -10,20 +10,21 @@ void PriorityQueue::addCity(City *city)
 {
     NodeCity *auxNode = head;
 
-    NodeCity * newNode = new NodeCity(city);
+    NodeCity *newNode = new NodeCity(city);
     if (head == nullptr)
     {
         head = newNode;
         return;
     }
 
-    if(head->city->getDistance()> city->getDistance()){
+    if (head->city->getDistance() > city->getDistance())
+    {
         newNode->next = head;
         head = newNode;
         return;
     }
 
-    while (auxNode->next != nullptr && auxNode->next->city->getDistance()<city->getDistance())
+    while (auxNode->next != nullptr && auxNode->next->city->getDistance() < city->getDistance())
     {
         auxNode = auxNode->next;
     }
@@ -31,23 +32,22 @@ void PriorityQueue::addCity(City *city)
     newNode->next = auxNode->next;
     auxNode->next = newNode;
 }
-void PriorityQueue::print(){
+void PriorityQueue::print()
+{
     NodeCity *auxNode = head;
-    while (auxNode!= nullptr)
+    while (auxNode != nullptr)
     {
-        std::cout << auxNode->city->getCityId()+1 << " " << auxNode->city->getDistance() <<" ";
+        std::cout << auxNode->city->getCityId() + 1 << " " << auxNode->city->getDistance() << " ";
         auxNode = auxNode->next;
     }
-    cout<<endl;
+    cout << endl;
 }
 int PriorityQueue::popFirst()
 {
 
-
     int cityId = head->city->getCityId();
 
-
-    NodeCity * aux = head;
+    NodeCity *aux = head;
     head = head->next;
 
     delete aux;

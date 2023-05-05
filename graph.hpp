@@ -9,18 +9,17 @@
 
 using namespace std;
 class Graph {
-    list<City> **graph;
+public:
     int length;
 
     int destinyCity;
 
-public:
+    list<City> **graph;
     Graph(int num_vertices);
     void addVertex(const int originId,const City city);
     void print();
     int dijkstra();
-    int auxDijkstra(int destinyCity);
-
+    Graph bfs();
 private:
 };
 

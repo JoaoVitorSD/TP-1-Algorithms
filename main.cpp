@@ -21,9 +21,10 @@ int main(int argc, char const *argv[])
             continue;
         }
         graph->addVertex(origin-1,  City(destiny-1, weight));
-        graph->addVertex(destiny-1, City(origin-1, weight));
      
     }
-    std::cout<<graph->dijkstra()<<"\n";
+    // graph->bfs().print();
+    // cout <<" DIJKSTRA\n";
+    cout <<graph->bfs().dijkstra()<<endl;
     return 0;
 }

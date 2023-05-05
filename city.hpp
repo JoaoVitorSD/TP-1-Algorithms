@@ -9,10 +9,10 @@ class City{
         int getDistance(){return distance;}
         bool operator==(const City &s);
         bool operator!=(const City &s);
-
-    private:
      int cityId;
      int distance;
+
+    private:
 };
 
 #endif              
